@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ChatMixin {
     @Inject(method = "sendChat", at = @At("HEAD"), cancellable = true)
     private void onSendChat(String message, CallbackInfo ci) {
+        // 只处理以.give开头的命令，让/give保持原样
         if (message.startsWith(".give ")) {
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null) return;

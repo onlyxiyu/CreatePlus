@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MapRenderer.class)
 public class MapRendererMixin {
     private static final ResourceLocation[] LOADING_FRAMES = new ResourceLocation[6];
-    private static final int FRAME_TIME = 50; // 调整帧率
+    private static final int FRAME_TIME = 150; // 调整帧率
     private long startTime = -1;
     private int currentFrame = 0;
     private boolean isLoading = true;
