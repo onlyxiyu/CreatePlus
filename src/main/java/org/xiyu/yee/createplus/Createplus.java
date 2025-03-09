@@ -175,6 +175,7 @@ public class Createplus {
             event.register(KeyBindings.TOGGLE_HUD);
             event.register(KeyBindings.TOGGLE_FREECAM);
             event.register(KeyBindings.TOGGLE_ZOOM);
+            event.register(KeyBindings.TOGGLE_MODULES);
         }
     }
 

@@ -10,18 +10,20 @@ import org.xiyu.yee.createplus.Createplus;
 import org.xiyu.yee.createplus.features.CreativePlusFeature;
 import org.xiyu.yee.createplus.features.SubHUDFeature;
 import org.xiyu.yee.createplus.utils.KeyBindings;
+import org.xiyu.yee.createplus.utils.ConfigManager;
 
 import java.util.List;
 
 public class FeatureScreen {
     private static boolean visible = false;
+    private static float opacity = 1.0f;
     private int selectedIndex = 0;
     private float targetScrollY = 0;
     private float currentScrollY = 0;
     private static final float SCROLL_SPEED = 0.3f;
     private static final int BACKGROUND_COLOR = 0x80000000;
     private static final int SELECTED_COLOR = 0x40FFFFFF;
-    private static final int TEXT_COLOR = 0xFFFFFFFF;
+    private static final int TEXT_COLOR = 0xFFFFFF;
     private static final int DESCRIPTION_COLOR = 0xFFAAAAAA;
     
     private boolean isInSubHUD = false;  // 是否在子HUD中
@@ -51,11 +53,15 @@ public class FeatureScreen {
         int panelX = 10;
         int panelY = (screenHeight - panelHeight) / 2;
 
-        // 渲染半透明背景
-        renderRoundedRect(graphics, panelX, panelY, panelX + panelWidth, panelY + panelHeight, BACKGROUND_COLOR);
+        // 使用透明度渲染背景
+        int bgAlpha = (int)(opacity * 0x80);
+        int bgColor = (bgAlpha << 24) | (BACKGROUND_COLOR & 0xFFFFFF);
+        renderRoundedRect(graphics, panelX, panelY, panelX + panelWidth, panelY + panelHeight, bgColor);
 
         // 渲染标题
-        graphics.drawString(mc.font, "CreatePlus 功能列表", panelX + 5, panelY + 5, TEXT_COLOR);
+        graphics.drawString(mc.font, 
+            Component.translatable("createplus.title"), 
+            panelX + 5, panelY + 5, 0xFFFFFFFF);
 
         // 设置裁剪区域
         int contentY = panelY + 20;
@@ -69,15 +75,21 @@ public class FeatureScreen {
         for (int i = 0; i < features.size(); i++) {
             CreativePlusFeature feature = features.get(i);
             
-            // 只渲染在可视区域内的项目
             if (y + itemHeight >= contentY && y <= contentY + contentHeight) {
                 if (i == selectedIndex && !isInSubHUD) {
-                    renderRoundedRect(graphics, panelX, y, panelX + panelWidth, y + itemHeight, SELECTED_COLOR);
+                    int selectedAlpha = (int)(opacity * 0x40);
+                    int selectedColor = (selectedAlpha << 24) | (SELECTED_COLOR & 0xFFFFFF);
+                    renderRoundedRect(graphics, panelX, y, panelX + panelWidth, y + itemHeight, selectedColor);
                 }
 
-                graphics.drawString(mc.font, feature.getName() + 
-                    (feature.isEnabled() ? " §a[开启]" : " §7[关闭]"), 
-                    panelX + 5, y + 6, TEXT_COLOR);
+                // 使用 Component 直接渲染
+                Component text = Component.translatable(feature.getTranslationKey())
+                    .append(" ")
+                    .append(Component.translatable(feature.isEnabled() ? 
+                        "createplus.status.enabled" : 
+                        "createplus.status.disabled"));
+                
+                graphics.drawString(mc.font, text, panelX + 5, y + 6, 0xFFFFFFFF);
             }
             y += itemHeight;
         }
@@ -91,15 +103,13 @@ public class FeatureScreen {
             int descPanelWidth = 200;
             
             // 渲染描述背景
-            renderRoundedRect(graphics, descPanelX, panelY, descPanelX + descPanelWidth, panelY + panelHeight, BACKGROUND_COLOR);
+            renderRoundedRect(graphics, descPanelX, panelY, 
+                descPanelX + descPanelWidth, panelY + panelHeight, bgColor);
 
             // 渲染描述文本
-            String[] descLines = selectedFeature.getDescription().split("\n");
+            Component description = Component.translatable(selectedFeature.getDescriptionKey());
             int descY = panelY + 5;
-            for (String line : descLines) {
-                graphics.drawString(mc.font, line, descPanelX + 5, descY, DESCRIPTION_COLOR);
-                descY += 12;
-            }
+            graphics.drawString(mc.font, description, descPanelX + 5, descY, 0xFFFFFFFF);
 
             // 如果是SubHUDFeature且启用，渲染子HUD
             if (selectedFeature instanceof SubHUDFeature subHUD && selectedFeature.isEnabled() && subHUD.isSubHUDVisible()) {
@@ -209,5 +219,24 @@ public class FeatureScreen {
 
     public static void setVisible(boolean value) {
         visible = value;
+    }
+
+    public static float getOpacity() {
+        return opacity;
+    }
+
+    public static void setOpacity(float value) {
+        opacity = Math.max(0.1f, Math.min(1.0f, value));
+        ConfigManager.saveConfig();
+    }
+
+    // 添加辅助方法
+    private String getFeatureKey(String name) {
+        return name.toLowerCase()
+            .replace(' ', '_')
+            .replace("(", "")
+            .replace(")", "")
+            .replace("[", "")
+            .replace("]", "");
     }
 } 

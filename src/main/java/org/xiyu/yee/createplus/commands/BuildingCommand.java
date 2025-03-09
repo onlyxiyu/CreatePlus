@@ -168,7 +168,6 @@ public class BuildingCommand {
             source.sendFailure(Component.literal("§c没有正在预览的建筑！"));
             return 0;
         }
-
         manager.cancelImport();
         return 1;
     }

@@ -34,4 +34,12 @@ public class KeyBindings {
         GLFW.GLFW_KEY_LEFT_ALT,
         "key.categories.createplus"
     );
+
+    public static final KeyMapping TOGGLE_MODULES = new KeyMapping(
+        "key.createplus.toggle_modules",
+        KeyConflictContext.IN_GAME,
+        InputConstants.Type.KEYSYM,
+        GLFW.GLFW_KEY_RIGHT_SHIFT,
+        "key.categories.createplus"
+    );
 } 

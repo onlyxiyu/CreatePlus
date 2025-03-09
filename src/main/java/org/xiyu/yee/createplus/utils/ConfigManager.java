@@ -11,6 +11,7 @@ import org.xiyu.yee.createplus.features.Performance;
 import org.xiyu.yee.createplus.features.GammaOverride;
 import org.xiyu.yee.createplus.features.PingDisplay;
 import org.xiyu.yee.createplus.features.MiniHUD;
+import org.xiyu.yee.createplus.ui.FeatureScreen;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -250,5 +251,16 @@ public class ConfigManager {
             valueColors.addProperty(element, miniHUD.getValueColor(element));
         }
         config.add("valueColors", valueColors);
+    }
+
+    private static void loadFeatureScreenConfig(JsonObject config) {
+        if (config.has("hudOpacity")) {
+            FeatureScreen.setOpacity(config.get("hudOpacity").getAsFloat());
+        }
+    }
+
+    private static void saveFeatureScreenConfig(JsonObject config) {
+        // ... 其他配置保存 ...
+        config.addProperty("hudOpacity", FeatureScreen.getOpacity());
     }
 } 
