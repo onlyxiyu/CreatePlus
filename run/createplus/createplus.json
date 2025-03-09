@@ -1,0 +1,94 @@
+{
+  "改进飞行": {
+    "enabled": false
+  },
+  "无限放置": {
+    "enabled": false
+  },
+  "快速建造": {
+    "enabled": false
+  },
+  "区域复制": {
+    "enabled": false
+  },
+  "镜像建造": {
+    "enabled": false
+  },
+  "feature.createplus.spinbot.name": {
+    "enabled": false
+  },
+  "范围破坏": {
+    "enabled": false
+  },
+  "范围放置": {
+    "enabled": false
+  },
+  "方块变色": {
+    "enabled": false
+  },
+  "建筑导出": {
+    "enabled": false
+  },
+  "脚手架": {
+    "enabled": false
+  },
+  "夜视": {
+    "enabled": false,
+    "originalGamma": 0.0,
+    "nightVisionGamma": 240.0
+  },
+  "延迟显示": {
+    "enabled": false,
+    "backgroundColor": -2147483648,
+    "backgroundOpacity": 0.5
+  },
+  "长臂猿": {
+    "enabled": false
+  },
+  "速度调整": {
+    "enabled": true,
+    "speeds": {
+      "WALK": 1.9999999,
+      "FLY": 2.0,
+      "RIDE": 2.0,
+      "SWIM": 2.0,
+      "ELYTRA": 2.0,
+      "SPINBOT": 2.0
+    }
+  },
+  "灵魂出窍": {
+    "enabled": false
+  },
+  "视角缩放": {
+    "enabled": false
+  },
+  "性能优化": {
+    "enabled": false,
+    "disableParticles": false,
+    "disableBlockBreakingParticles": false,
+    "disableDeadMobRendering": false,
+    "disableEntityRendering": false,
+    "disableFallingBlockEntityRendering": false,
+    "disablePortalGuiClosing": false
+  },
+  "时间天气": {
+    "enabled": false
+  },
+  "迷你HUD": {
+    "enabled": false,
+    "textColors": {
+      "fps": 16777215,
+      "time": 16777215,
+      "pos": 16777215,
+      "biome": 16777215,
+      "localtime": 16777215
+    },
+    "valueColors": {
+      "fps": 16777215,
+      "time": 16777215,
+      "pos": 16777215,
+      "biome": 16777215,
+      "localtime": 16777215
+    }
+  }
+}

@@ -145,40 +145,44 @@ public class MiniHUD extends CreativePlusFeature {
                 .orElse("unknown");
 
         // FPS
-        renderSplitLine(graphics, "FPS: ", String.valueOf(mc.getFps()), 
+        renderSplitLine(graphics, "fps", String.valueOf(mc.getFps()), 
             "fps", 5, y);
         y += lineHeight;
 
         // 游戏时间
-        renderSplitLine(graphics, "天数: ", String.valueOf(mc.level.getDayTime() / 24000L), 
+        renderSplitLine(graphics, "time", String.valueOf(mc.level.getDayTime() / 24000L), 
             "time", 5, y);
-        renderSplitLine(graphics, " 时间: ", formatGameTime(mc.level.getDayTime() % 24000L), 
+        renderSplitLine(graphics, "time", formatGameTime(mc.level.getDayTime() % 24000L), 
             "time", 5 + mc.font.width("天数: " + mc.level.getDayTime() / 24000L), y);
         y += lineHeight;
 
         // 坐标
-        renderSplitLine(graphics, "XYZ: ", 
+        renderSplitLine(graphics, "pos", 
             String.format("%d %d %d", pos.getX(), pos.getY(), pos.getZ()),
             "pos", 5, y);
         y += lineHeight;
 
         // 生物群系
-        renderSplitLine(graphics, "生物群系: ", formatBiomeName(biome),
+        renderSplitLine(graphics, "biome", formatBiomeName(biome),
             "biome", 5, y);
         y += lineHeight;
 
         // 本地时间
-        renderSplitLine(graphics, "本地时间: ", TIME_FORMAT.format(new Date()),
+        renderSplitLine(graphics, "localtime", TIME_FORMAT.format(new Date()),
             "localtime", 5, y);
     }
 
-    private void renderSplitLine(GuiGraphics graphics, String label, String value, 
+    private void renderSplitLine(GuiGraphics graphics, String labelKey, String value, 
                                String element, int x, int y) {
         Minecraft mc = Minecraft.getInstance();
-        // 渲染文本标签
-        renderText(graphics, label, x, y, textColors.get(element));
+        // 渲染标签文本
+        Component label = Component.translatable("minihud." + labelKey);
+        graphics.drawString(mc.font, label, x, y, textColors.get(element));
+        
         // 渲染数值
-        renderText(graphics, value, x + mc.font.width(label), y, valueColors.get(element));
+        graphics.drawString(mc.font, value, 
+            x + mc.font.width(label.getString()) + 2, y, 
+            valueColors.get(element));
     }
 
     private void renderText(GuiGraphics graphics, String text, int x, int y, int color) {

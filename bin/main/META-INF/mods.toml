@@ -64,3 +64,6 @@ side = "BOTH"
 
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"
+
+[mods."${mod_id}".languageFilePattern]
+pattern="assets/${mod_id}/lang/%s.json"

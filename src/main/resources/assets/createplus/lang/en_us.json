@@ -5,5 +5,32 @@
   "key.createplus.toggle_hud": "Toggle Feature Menu",
   "key.categories.createplus": "Create Plus",
   "itemGroup.createplus.player_items": "Create Plus - Player Items",
-  "itemGroup.createplus.spawn_eggs": "Create Plus - Spawn Eggs"
+  "itemGroup.createplus.spawn_eggs": "Create Plus - Spawn Eggs",
+  "createplus.title": "CreatePlus Features",
+  "createplus.hud.opacity": "HUD Opacity: %s%%",
+  
+  "feature.createplus.improved_flight.name": "Improved Flight",
+  "feature.createplus.infinite_placement.name": "Infinite Placement",
+  "feature.createplus.speed_build.name": "Speed Build",
+  "feature.createplus.area_copy.name": "Area Copy",
+  "feature.createplus.mirror_build.name": "Mirror Build",
+  "feature.createplus.spinbot.name": "SpinBot",
+  "feature.createplus.nucker.name": "Nucker",
+  "feature.createplus.area_place.name": "Area Place",
+  "feature.createplus.block_color_swap.name": "Block Color Swap",
+  "feature.createplus.building_export.name": "Building Export",
+  "feature.createplus.scaffold.name": "Scaffold",
+  "feature.createplus.gamma_override.name": "Night Vision",
+  "feature.createplus.ping_display.name": "Ping Display",
+  "feature.createplus.speed_adjust.name": "Speed Adjust",
+  "feature.createplus.freecam.name": "Freecam",
+  "feature.createplus.zoom.name": "Zoom",
+  "feature.createplus.performance.name": "Performance",
+  "feature.createplus.time_weather.name": "Time Weather",
+  "feature.createplus.mini_hud.name": "Mini HUD",
+
+  "createplus.status.enabled": "§a[ON]",
+  "createplus.status.disabled": "§c[OFF]",
+  
+  "createplus.modules.title": "Modules"
 } 

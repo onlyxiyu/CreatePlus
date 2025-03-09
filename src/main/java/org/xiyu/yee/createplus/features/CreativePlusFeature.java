@@ -4,13 +4,23 @@ import net.minecraft.network.chat.Component;
 import org.xiyu.yee.createplus.Createplus;
 
 public abstract class CreativePlusFeature {
+    private final String name;
+    private final String translationKey;
+    private final String descriptionKey;
     private boolean enabled = false;
-    private final Component name;
-    private final Component description;
 
-    public CreativePlusFeature(String translationKey, String descriptionKey) {
-        this.name = Component.translatable(translationKey);
-        this.description = Component.translatable(descriptionKey);
+    public CreativePlusFeature(String name, String description) {
+        this.name = name;
+        String baseKey = "feature." + Createplus.MODID + "." + 
+            name.toLowerCase()
+                .replace(' ', '_')
+                .replace("(", "")
+                .replace(")", "")
+                .replace("[", "")
+                .replace("]", "");
+        
+        this.translationKey = baseKey + ".name";
+        this.descriptionKey = baseKey + ".description";
     }
 
     public abstract void onEnable();
@@ -43,11 +53,19 @@ public abstract class CreativePlusFeature {
     }
 
     public String getName() {
-        return name.getString();
+        return name;
+    }
+
+    public String getTranslationKey() {
+        return translationKey;
+    }
+
+    public String getDescriptionKey() {
+        return descriptionKey;
     }
 
     public String getDescription() {
-        return description.getString();
+        return Component.translatable(descriptionKey).getString();
     }
 
     public void handleClick(boolean isRightClick) {
